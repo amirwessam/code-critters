@@ -1,0 +1,9 @@
+flask
+flask-cors
+requests
+transformers
+torch
+pandas
+faiss-cpu
+scikit-learn
+markdown2  # Added for markdown to HTML conversion

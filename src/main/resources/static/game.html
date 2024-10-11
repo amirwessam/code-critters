@@ -2,7 +2,7 @@
   #%L
   Code Critters
   %%
-  Copyright (C) 2019 Michael Gruber
+  Copyright (C) 2019 - 2024 Michael Gruber
   %%
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as
@@ -21,7 +21,6 @@
   -->
 <!doctype html>
 <html>
-
 <head>
     <title>Code Critters</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,24 +29,31 @@
         window.Polymer = window.Polymer || {};
         window.Polymer.dom = 'shadow';
     </script>
-    <script type=module src="critter_components/critter-game/critter-game.js"></script>
+    <script type="module" src="critter_components/critter-game/critter-game.js"></script>
     <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
-
-
-    <custom-style>
-        <style>
-            body {
-                background: #F3F4F6;
-                font-family: Arial;
-                font-size: 0.8em;
-            }
-        </style>
-
-    </custom-style>
-
+    
+    <style>
+        #loading {
+            display: none; /* Hidden by default */
+            color: blue;   /* Change the color as needed */
+        }
+        body {
+            background: #F3F4F6;
+            font-family: Arial;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 
 <body>
-<critter-game id="board" width="16" height="16"></critter-game>
+    <h1>Learn Data Structures with GPT-Neo</h1>
+    <input type="text" id="promptInput" placeholder="Enter your prompt">
+    <button onclick="sendPrompt()">Generate Response</button>
+    <p id="loading">Loading...</p> <!-- Loading text -->
+    <p id="responseOutput"></p>  <!-- This is where the response will be displayed -->
+    
+    <!-- Link to your JavaScript files -->
+    <script src="frontend/app.js"></script>
+    <script src="pathfinding/pathfinding-browser.min.js"></script>
 </body>
 </html>
