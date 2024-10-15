@@ -1,0 +1,273 @@
+Dynamic Programming
+
+Dynamic Programming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dynamic Programming
+Dynamic Programming is a method for designing algorithms.
+An algorithm designed with Dynamic Programming divides the problem into subproblems, finds solutions to the subproblems, and puts them together to form a complete solution to the problem we want to solve.
+
+To design an algorithm for a problem using Dynamic Programming, the problem we want to solve must have these two properties:
+
+Overlapping Subproblems: Means that the problem can be broken down into smaller subproblems, where the solutions to the subproblems are overlapping. Having subproblems that are overlapping means that the solution to one subproblem is part of the solution to another subproblem.
+Optimal Substructure: Means that the complete solution to a problem can be constructed from the solutions of its smaller subproblems. So not only must the problem have overlapping subproblems, the substructure must also be optimal so that there is a way to piece the solutions to the subproblems together to form the complete solution.
+
+
+We have already seen Dynamic Programming in this tutorial, in the memoization and tabulation techniques, and for solving problems like the 0/1 Knapsack Problem, or to find the shortest path with the Bellman-Ford algorithm.
+
+Note: Another way of designing an algorithm is using a greedy approach.
+
+
+
+Using Dynamic Programming To Find The \(n\)th Fibonacci Number
+Let's say we want an algorithm that finds the \(n\)th Fibonacci number. We don't know how to find the \(n\)th Fibonacci number yet, except that we want to use Dynamic Programming to design the algorithm.
+
+The Fibonacci numbers is a sequence of numbers starting with \(0\) and \(1\), and the next numbers are created by adding the two previous numbers.
+The 8 first Fibonacci numbers are: \(0,\; 1,\; 1,\; 2,\; 3,\; 5,\; 8,\; 13\).
+And counting from 0, the \(4\)th Fibonacci number \(F(4)\) is \(3\).
+In general, this is how a Fibonacci number is created based on the two previous:
+\[
+  F(n)=F(n-1)+F(n-2) 
+  \]
+
+So how can we use Dynamic Programming to design an algorithm that finds the \(n\)th Fibonacci number?
+There is no exact rule for how to design an algorithm using Dynamic Programming, but here is a suggestion that should work in most cases:
+
+Check if the the problem has "overlapping subproblems" and an "optimal substructure".
+Solve the most basic subproblems.
+Find a way to put the subproblem solutions together to form solutions to new subproblems.
+Write the algorithm (the step-by-step procedure).
+Implement the algorithm (test if it works).
+
+Let's do it.
+
+Step 1: Check if the problem has "overlapping subproblems" and an "optimal substructure".
+Before trying to find an algorithm using Dynimaic Programming, we must first check if the problem has the two properties "overlapping subproblems" and "optimal substructure".
+Overlapping subproblems? 
+Yes. The \(6\)th Fibonacci number is a combination of the \(5\)th and \(4\)th Fibonacci number: \(8=5+3\). And this rule holds for all other Fibonacci numbers as well. This shows that the problem of finding the \(n\)th Fibonacci number can be broken into subproblems.
+Also, the subproblems overlap because \(F(5)\) is based on \(F(4)\) and \(F(3)\), and \(F(6)\) is based on \(F(5)\) and \(F(4)\).
+\[
+  \begin{equation}
+  \begin{aligned}
+F(5) {} & =\underline{F(4)}+F(3) \\
+5       & =\underline{3}+2 \\\\
+        & and \\\\
+F(6)    & =F(5)+\underline{F(4)} \\
+8       & =5+\underline{3}
+\end{aligned}
+\end{equation}
+\]
+ You see? Both solutions to subproblems \(F(5)\) and \(F(6)\) are created using the solution to \(F(4)\), and there are many cases like that, so the subproblems overlap as well.
+Optimal substructure? 
+Yes, the Fibonacci number sequence has a very clear structure, because the two previous numbers are added to create the next Fibonacci number, and this holds for all Fibonacci numbers except for the two first. This means we know how to put together a solution by combining the solutions to the subproblems.
+We can conclude that the problem of finding the \(n\)th Fibonacci number satisfies the two requirements, which means that we can use Dynamic Programming to find an algorithm that solves the problem.
+
+Step 2: Solve the most basic subproblems.
+We can now start trying to find an algorithm using Dynamic Programming.
+Solving the most basic subproblems first is a good place to start to get an idea of how the algorithm should run.
+In our problem of finding the \(n\)th Fibonacci number, finding the most basic subproblems is not that hard, because we already know that
+\[
+F(0)=0 \\
+F(1)=1 \\ 
+F(2)=1 \\ 
+F(3)=2 \\ 
+F(4)=3 \\ 
+F(5)=5 \\ 
+F(6)=8 \\
+...
+\]
+
+Step 3: Find a way to put the subproblem solutions together to form solutions to new subproblems.
+In this step, for our problem, how the subproblems are put together is quite straightforward, we just need to add the two previous Fibonacci numbers to find the next one.
+So for example, the \(2\)nd Fibonacci number is created by adding the two previous numbers \(F(2)=F(1)+F(0)\), and that is the general rule as well, like mentioned earlier: \(F(n)=F(n-1)+F(n-2)\).
+
+Note: In other problems, combining solutions to subproblems to form new solutions usually involves making decisions like "should we choose this way, or this way?", or "should we include this item, or not?".
+
+
+Step 4: Write the algorithm (the step-by-step procedure).
+Instead of writing the text for the algorithm straight away, it might be wise to try to write a procedure to solve a specific problem first, like finding the \(6\)th Fibonacci number.
+For reference, the 8 first Fibonacci numbers are: \(0,\; 1,\; 1,\; 2,\; 3,\; 5,\; \underline{8},\; 13\).
+Finding the \(6\)th Fibonacci number, we could start with the two first numbers \(0\) and \(1\), which appear in place 0 and 1 in the sequence, and put them in an array, at index 0 and 1. Then we could add the two first numbers in the array to generate the next number, and push that new number as a new element to the array. If we continue like this until the array is 7 elements long we would stop and return F[6]. That would work, right?
+After solving the specific problem above, it is now easier to write the actual algorithm.
+The algorithm for finding the \(n\)th Fibonacci number, using Dynamic Programming as a design method, can be described like this:
+
+How it works:
+
+Create an array F, with \(n+1\) elements.
+Store the two first Fibonacci numbers F[0]=0 and F[1]=1.
+Store the next element F[2]=F[1]+F[0], and continue to create new Fibonacci numbers like that until the value in F[n] is created.
+Return F[n].
+
+
+
+Step 5: Implement the algorithm (test if it works).
+To implement the algorithm above, we assume that the argument n to the function is a positive number (the \(n\)th Fibonacci number), we use a for loop to create new Fibonacci numbers, and we return the base cases F[0] and F[1] straight away if the function is called with 0 or 1 as an argument.
+Implementing the algorithm also means that we can check if it works.
+
+Example
+Finding the 6th Fibonacci number with our new algorithm:
+def nth_fibo(n):
+    if n==0: return 0
+    if n==1: return 1
+
+    F = [None] * (n + 1)
+    F[0] = 0
+    F[1] = 1
+
+    for i in range(2, n + 1):
+        F[i] = F[i - 1] + F[i - 2]
+
+    return F[n]
+
+n = 6
+result = nth_fibo(n)
+print(f"The {n}th Fibonacci number is {result}")
+Run Example »
+
+There it is!
+We have used Dynamic Programming as a design method to create an algorithm that finds the \(n\)th Fibonacci number.
+We have also implemented the algorithm to demonstrate that it works, and in doing so we have unintentionally used a well established technique within Dynamic Programming called tabulation, where the solution is found by solving subproblems bottom-up, using some kind of table.
+Furthermore, we have avoided calculating the same overlapping subproblems many times, like F[3] for example, that we could potentially have ended up doing otherwise, with a brute force recursive approach for example.
+Another technique used in Dynamic Programming is called memoization. In this case, using memoization essentially solves the problem recursively with brute force, but stores the subproblem solutions for later as the algorithm runs to avoid doing the same calculations more than once.
+
+Techniques Used in Dynamic Programming
+It might be difficult to design an algorithm using Dynamic Programming, but the concept of Dynamic Programming is actually not that hard: Solve the problem, but since the subproblems are overlapping, do it in a smart way so that a specific subproblem only needs to be solved once.
+To be able to use solutions to previously solved subproblems in Dynamic Programming, the previously found solutions must be stored somehow, and that can be done using memoization or tabulation.
+Memoization is a technique used in Dynamic Programming, where the solution is found recursively. As the algorithm runs, solutions to subproblems are stored, and before trying to compute the solution to a subproblem, it checks first to see if that solution has already been computed, to avoid doing the same computation more than once.
+The memoization technique is called "top-down" because the initial function call is for the main problem, and it results in new function calls for solving smaller and smaller subproblems.
+Tabulation is a technique used in Dynamic Programming, where solutions to the overlapping subproblems are stored in a table (array), starting with the most basic subproblems.
+The tabulation technique is not recursive, and it is called "bottom-up" because of the way the final solution is built up by solving the most basic subproblems first. Since the most basic subproblem solutions are stored in the table first, when solving a subproblem later that relies on previous subproblems, the algorithm can just pick these solutions right from the table, no need to compute them again.
+To get a better sense of how memoization works, and is considered "top-down", and how tabulation works, and is "bottom-up", take a look at the two images below.
+
+
+
+
+F(10)
+
+
+
+F(9)
+
+
+
+.
+.
+.
+.
+
+
+
+F(2)
+
+
+
+
+F(1)
+
+
+
+
+F(0)
+
+
+
+The bottom-up tabulation approach to finding the 10th Fibonacci number.
+
+
+
+
+F(10)
+
+
+
+
+F(8)
+
+
+
+
+F(6)
+
+
+
+
+F(7)
+
+
+
+
+F(9)
+
+
+
+
+F(7)
+
+
+
+F(8)
+
+
+
+The top-down memoization approach to finding the 10th Fibonacci number.
+
+
+As you can see in the images above, the tabulation approach starts at the bottom by solving F(0) first, while the memoization approach start at the top with F(10) and breaking it into smaller and smaller subproblems from there.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+★
++1
+
+
+
+ 
+
+
+
+W3schools Pathfinder
+Track your progress - it's free!
+
+
+ 
+
+
+
+
+
+
+
+          Log in
+        
+
+          Sign Up

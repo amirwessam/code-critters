@@ -1,0 +1,170 @@
+DSA Greedy Algorithms
+
+DSA Greedy Algorithms
+
+
+Greedy Algorithms
+A greedy algorithm decides what to do in each step, only based on the current situation, without a thought of how the total problem looks like.
+In other words, a greedy algorithm makes the locally optimal choice in each step, hoping to find the global optimum solution in the end.
+In Dijkstra's algorithm for example, the next vertex to be visited is always the next unvisited vertex with the currently shortest distance from the source, as seen from the current group of visited vertices.
+
+
+
+
+
+
+
+
+
+
+
+
+{{ buttonText }}{{ msgDone }}
+    
+
+
+So Dijkstra's algorithm is greedy because the choice of which vertex to visit next is only based on the currently available information, without considering the overall problem or how this choice might affect future decisions or the shortest paths in the end.
+Choosing a greedy algorithm is a design choice, just like Dynamic Programming is another algorithm design choice.
+
+Two properties must be true for a problem for a greedy algorithm to work:
+
+Greedy Choice Property: Means that the problem is so that the solution (the global optimum) can be reached by making greedy choices in each step (locally optimal choices).
+Optimal Substructure: Means that the optimal solution to a problem, is a collection of optimal solutions to sub-problems. So solving smaller parts of the problem locally (by making greedy choices) contributes to the overall solution.
+
+
+Most of the problems in this tutorial, like sorting an array, or finding the shortest paths in a graph, have these properties, and those problems can therefore be solved by greedy algorithms like Selection sort or Dijkstra's algorithm.
+But problems like The Traveling Salesman, or the 0/1 Knapsack Problem, do not have these properties, and so a greedy algorithm can not be used to solve them. These problems are discussed further down.
+In addition, even if a problem can be solved by a greedy algorithm, it can also be solved by non-greedy algorithms.
+
+Algorithms That Are Not Greedy
+Below are algorithms that are not greedy, meaning they do not only rely on doing locally optimal choices in each step:
+
+Merge Sort: Splits the array in halves over and over again, and then merges the array parts together again in a way that results in a sorted array. These operations are not a series of locally optimal choices like greedy algorithms are.
+Quick Sort: The choice of pivot element, the arranging of elements around the pivot element, and the recursive calls to do the same with the left and right side of the pivot element — those actions do not rely on making greedy choices.
+BFS and DFS Traversal: These algorithms traverse a graph without making a choice locally in each step on how to continue with the traversal, and so they are not greedy algorithms.
+Finding the nth Fibonacci number using memoization: This algorithm belongs to a way of solving problems called Dynamic Programming, which solves overlapping sub-problems, and then pieces them back together. Memoization is used in each step to optimize the overall algorithm, which means that at each step, this algorithm does not only consider what is the locally optimal solution, but it also takes into account that a result computed in this step, might be used in later steps.
+
+
+The 0/1 Knapsack Problem
+The 0/1 Knapsack Problem cannot be solved by a greedy algorithm because it does not fulfill the greedy choice property, and the optimal substructure property, as mentioned earlier.
+
+The 0/1 Knapsack Problem
+Rules:
+
+Every item has a weight and value.
+Your knapsack has a weight limit.
+Choose which items you want to bring with you in the knapsack.
+You can either take an item or not, you cannot take half of an item for example.
+
+Goal:
+
+Maximize the total value of the items in the knapsack.
+
+
+This problem cannot be solved by a greedy algorithm, because choosing the item with the highest value, the lowest weight, or the highest value to weight ratio, in each step (local optimal solution, greedy), does not guarantee the optimal solution (global optimum).
+Let's say your backpack's limit is 10 kg, and you have these three treasures in front of you:
+
+
+
+Treasure
+Weight
+Value
+
+
+An old shield
+5 kg
+$300
+
+
+A nicely painted clay pot
+4 kg
+$500
+
+
+A metal horse figure
+7 kg
+$600
+
+
+
+Making the greedy choice by taking the most valuable thing first, the horse figure with value $600, means that you can not bring any of the other things without breaking the weight limit.
+So by trying to solve this problem in a greedy way you end up with a metal horse with value $600.
+But the best solution in this case is taking the shield and the pot, maximizing the total value in the backpack to be $800, while still being under the weight limit.
+What about always taking the treasure with the lowest weight? Or always taking the treasure with the highest value to weight ratio? 
+While following those principles would actually lead us to the best solution in this specific case, we could not guarantee that those principles would work if the values and weights in this example were changed.
+This means that The 0/1 Knapsack Problem cannot be solved with a greedy algorithm.
+Read more about The 0/1 Knapsack Problem here.
+
+The Traveling Salesman
+The Traveling Salesman Problem is a famous problem that also cannot be solved by a greedy algorithm, because it does not fulfill the greedy choice property, and the optimal substructure property, as mentioned earlier.
+The Traveling Salesman Problem states that you are a salesperson with a number of cities or towns you must visit to sell your things.
+
+The Traveling Salesman Problem
+Rules: Visit every city only once, then return back to the city you started in.
+Goal: Find the shortest possible route.
+
+Using a greedy algorithm here, you would always go to the next unvisited city that is closest to the city you are currently in. But this would in most cases not lead you to the optimal solution with the shortest total path.
+The simulation below shows how it looks like when a greedy algorithm tries to solve The Traveling Salesman Problem. 
+Running the simulation, it might not always be obvious that the algorithm is flawed, but you might notice how sometimes the lines are crossing, creating a longer total distance, when that is clearly not necessary.
+
+
+A greedy algorithm trying to solve The Traveling Salesman Problem.
+
+
+
+
+
+
+
+
+
+
+{{ buttonText }}
+
+
+
+While running a greedy approach to The Traveling Salesman Problem sometimes gives us a pretty good approximation to the shortest possible route, a greedy algorithm will not be able to solve The Traveling Salesman Problem in general.
+The Traveling Salesman Problem does not fulfill the properties needed so that it can be solved by a greedy algorithm.
+
+Note: There is actually no algorithm that finds the shortest route in The Traveling Salesman Problem efficiently. We just have to check all possible routes! This gives us a time complexity of \(O(n!)\), which means the number of calculations explodes when the number of cities (\(n\)) is increased.
+
+Read more about the Traveling Salesman Problem here.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+★
++1
+
+
+
+ 
+
+
+
+W3schools Pathfinder
+Track your progress - it's free!
+
+
+ 
+
+
+
+
+
+
+
+          Log in
+        
+
+          Sign Up

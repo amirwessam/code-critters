@@ -1,0 +1,145 @@
+Memoization
+
+Memoization
+
+
+Memoization
+Memoization is a technique where results are stored to avoid doing the same computations many times.
+When Memoization is used to improve recursive algorithms, it is called a "top-down" approach because of how it starts with the main problem and breaks it down into smaller subproblems.
+Memoization is used in Dynamic Programming.
+
+
+Using Memoization To Find The \(n\)th Fibonacci Number
+The \(n\)th Fibonacci number can be found using recursion. Read more about how that is done on this page.
+The problem with this implementation is that the number of computations and recursive calls "explodes" when trying to find a higher Fibonacci number, because the same computations are done over and over again.
+
+Example
+Find the 6th Fibonacci number with recursion:
+def F(n):
+    print('Computing F('+str(n)+')')
+    if n <= 1:
+        return n
+    else:
+        return F(n - 1) + F(n - 2)
+
+print('F(6) = ',F(6))
+Run Example »
+
+As you can see from running the example above, there are 25 computations, with the same computations done many times, even for just finding the 6th Fibonacci number.
+But using memoization can help finding the \(n\)th Fibonacci number using recursion much more effectively.
+We use memoization by creating an array memo to hold the Fibonacci numbers, so that Fibonacci number n can be found as element memo[n]. And we only compute the Fibonacci number if it does not already exist in the memo array.
+
+Example
+Find the 6th Fibonacci number with recursion, but using memoization to avoid unnecessary recursive calls:
+def F(n):
+    if memo[n] != None: # Already computed
+        return memo[n]
+    else: # Computation needed
+        print('Computing F('+str(n)+')')
+        if n <= 1:
+            memo[n] = n
+        else:
+            memo[n] = F(n - 1) + F(n - 2)
+        return memo[n] 
+
+memo = [None]*7
+print('F(6) = ',F(6))
+print('memo = ',memo)
+Run Example »
+
+As you can see by running the examples above, memoization is very helpful to reduce the number of computations. 
+The number of computations is reduced from 25 in the initial code, to just 7 in the last example using memoization, and the benefit of using memoization increases really fast by how high the Fibonacci number we want to find is.
+Finding the 30th Fibonacci number requires 2,692,537 computations in the initial code, but it just requires 31 computations in the algorithm implemented using memoization!
+You get this result by running the code below.
+
+Example
+See the difference in calculations for finding the 30th Fibonacci number, with and without memoization:
+computation_count = 0
+def F(n):
+    global computation_count
+    computation_count += 1
+    if n <= 1:
+        return n
+    else:
+        return F(n - 1) + F(n - 2)
+        
+computation_count_mem = 0
+def F_mem(n):
+    if memo[n] != None: # Already computed
+        return memo[n]
+    else: # Computation needed
+        global computation_count_mem
+        computation_count_mem += 1
+        if n <= 1:
+            memo[n] = n
+        else:
+            memo[n] = F_mem(n - 1) + F_mem(n - 2)
+        return memo[n] 
+
+print('F(30) = ',F(30))
+print(f'Number of computations: {computation_count}')
+print('\nUsing memoization:')
+memo = [None]*31
+print('F(30) = ',F_mem(30))
+print(f'Number of computations with memoiztion: {computation_count_mem}')
+Run Example »
+
+
+Memoization in AVL Trees
+For more details about what an AVL Tree is, please see this page.
+An AVL tree is a type of Binary Tree that is self-balancing.
+Every time a node is inserted or deleted from an AVL tree, the balancing factor must be calculated for all ancestors, using the height of the left and right subtrees to find out if a rotation is needed to restore balance.
+To avoid calculating the height of each node (going all the way down to the leaf nodes) to calculate the balancing factors, each node has its subtree height stored.
+
+Example
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.height = 1
+Run Example »
+
+This means that to find the balance factor for a node, the already stored left child's height is subtracted from the already stored right child's height, no other calculations needed.
+Storing height in AVL trees is a form of memoization, because values are stored to avoid re-calculating them. In AVL trees, when the height is stored like this, it is called an augmented property.
+An augmented property is a property of an element that does not have to be stored, but is stored to make operations more efficient.
+The node heights must be calculated at some point of course, but that is only done when strictly needed, using retracing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+★
++1
+
+
+
+ 
+
+
+
+W3schools Pathfinder
+Track your progress - it's free!
+
+
+ 
+
+
+
+
+
+
+
+          Log in
+        
+
+          Sign Up

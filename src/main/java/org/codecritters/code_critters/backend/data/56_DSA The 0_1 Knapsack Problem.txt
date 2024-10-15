@@ -1,0 +1,581 @@
+DSA The 0/1 Knapsack Problem
+
+DSA The 0/1 Knapsack Problem
+
+
+The 0/1 Knapsack Problem
+The 0/1 Knapsack Problem states that you have a backpack with a weight limit, and you are in a room full of treasures, each treasure with a value and a weight.
+To solve the 0/1 Knapsack Problem you must figure out which treasures to pack to maximize the total value, and at the same time keeping below the backpack's weight limit.
+
+
+
+
+      Bravo! You found the items that gives the maximum value😀
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+2
+3
+
+
+Knapsack
+$ {{ totalValue }}
+{{ totalWeight }}/{{limit}} kg
+
+
+
+{{ item.name }}
+$ {{ item.value }}
+{{ item.weight }} kg
+
+
+
+
+
+
+
+
+
+
+
+Are you able to solve the 0/1 Knapsack Problem above manually? Continue reading to see different implementations that solves the 0/1 Knapsack Problem.
+Solving the 0/1 Knapsack Problem helps businesses decide which projects to fund within a budget, maximizing profit without overspending. It is also used in logistics to optimize the loading of goods into trucks and planes, ensuring the most valuable, or highest prioritized, items are included without exceeding weight limits.
+
+The 0/1 Knapsack Problem
+Rules:
+
+Every item has a weight and value.
+Your knapsack has a weight limit.
+Choose which items you want to bring with you in the knapsack.
+You can either take an item or not, you cannot take half of an item for example.
+
+Goal:
+
+Maximize the total value of the items in the knapsack.
+
+
+
+The Brute Force Approach
+Using brute force means to just check all possibilities, looking for the best result. This is usually the most straight forward way of solving a problem, but it also requires the most calculations.
+To solve the 0/1 Knapsack Problem using brute force means to:
+
+Calculate the value of every possible combination of items in the knapsack.
+Discard the combinations that are heavier than the knapsack weight limit.
+Choose the combination of items with the highest total value.
+
+
+How it works:
+
+Consider each item one at a time.
+      
+If there is capacity left for the current item, add it by adding its value and reducing the remaining capacity with its weight. Then call the function on itself for the next item.
+Also, try not adding the current item before calling the function on itself for the next item.
+
+
+Return the maximum value from the two scenarios above (adding the current item, or not adding it).
+
+
+This brute force approach to the 0/1 Knapsack problem can be implemented like this:
+
+Example
+Solving the 0/1 Knapsack Problem using recursion and brute force:
+def knapsack_brute_force(capacity, n):
+    print(f"knapsack_brute_force({capacity},{n})")
+    if n == 0 or capacity == 0:
+        return 0
+
+    elif weights[n-1] > capacity:
+        return knapsack_brute_force(capacity, n-1)
+
+    else:
+        include_item = values[n-1] + knapsack_brute_force(capacity-weights[n-1], n-1)
+        exclude_item = knapsack_brute_force(capacity, n-1)
+        return max(include_item, exclude_item)
+
+values = [300, 200, 400, 500]
+weights = [2, 1, 5, 3]
+capacity = 10
+n = len(values)
+
+print("\nMaximum value in Knapsack =", knapsack_brute_force(capacity, n))
+Run Example »
+
+Running the code above means that the knapsack_brute_force function is called many times recursively. You can see that from all the printouts.
+Every time the function is called, it will either include the current item n-1 or not.
+Line 2: This print statement shows us each time the function is called.
+Line 3-4: If we run out of items to check (n==0), or we run out of capacity (capacity==0), we do not do any more recursive calls because no more items can be added to the knapsack at this point.
+Line 6-7: If the current item  is heavier than the capacity (weights[n-1] > capacity), forget the current item and go to the next item.
+Line 10-12: If the current item can be added to the knapsack, see what gives you the highest value: adding the current item, or not adding the current item.
+Running the code example creates a recursion tree that looks like this, each gray box represents a function call:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Take crown?
+Take cup?
+Take globe?
+Take microscope?
+ 
+
+knapsack(10,4):
+include = 500 + ks(7,3)
+exclude = ks(10,3)
+
+
+
+
+
+ 
+
+knapsack(7,3):
+include = 400 + ks(2,2)
+exclude = ks(7,2)
+
+
+
+
+
+ 
+
+knapsack(10,3):
+include = 400 + ks(5,2)
+exclude = ks(10,2)
+
+
+
+
+
+ 
+
+knapsack(2,2):
+include = 200 + ks(1,1)
+exclude = ks(2,1)
+
+0
+
+
+
+ 
+
+knapsack(7,2):
+include = 200 + ks(6,1)
+exclude = ks(7,1)
+
+
+
+
+
+ 
+
+knapsack(5,2):
+include = 200 + ks(4,1)
+exclude = ks(5,1)
+
+
+
+
+
+ 
+
+knapsack(10,2):
+include = 200 + ks(9,1)
+exclude = ks(10,1)
+
+
+
+
+
+ 
+
+knapsack(2,1):
+include = 300 + ks(0,0)
+
+0
+exclude = ks(2,0)
+
+0
+
+ 
+
+knapsack(6,1):
+include = 300 + ks(4,0)
+
+0
+exclude = ks(6,0)
+
+0
+
+ 
+
+knapsack(7,1):
+include = 300 + ks(5,0)
+
+0
+exclude = ks(7,0)
+
+0
+
+ 
+
+knapsack(4,1):
+include = 300 + ks(2,0)
+
+0
+exclude = ks(4,0)
+
+0
+
+ 
+
+knapsack(5,1):
+include = 300 + ks(3,0)
+
+0
+exclude = ks(5,0)
+
+0
+
+ 
+
+knapsack(9,1):
+include = 300 + ks(7,0)
+
+0
+exclude = ks(9,0)
+
+0
+
+ 
+
+knapsack(10,1):
+include = 300 + ks(8,0)
+
+0
+exclude = ks(10,0)
+
+0
+
+
+
+
+Note: In the recursion tree above, writing the real function name knapsack_brute_force(7,3) would make the drawing too wide, so "ks(7,3)" or "knapsack(7,3)" is written instead.
+
+From the recursion tree above, it is possible to see that for example taking the crown, the cup, and the globe, means that there is no space left for the microscope (2 kg), and that gives us a total value of 200+400+500=1100.
+We can also see that only taking the microscope gives us a total value of 300 (right bottom gray box).
+As you can see in the recursion tree above, and by running the example code, the function is sometimes called with the same arguments, like knapsack_brute_force(2,0) is for example called two times. We avoid this by using memoization.
+
+The Memoization Approach (top-down)
+The memoization technique stores the previous function call results in an array, so that previous results can be fetched from that array and does not have to be calculated again.
+Read more about memoization here.
+Memoization is a 'top-down' approach because it starts solving the problem by working its way down to smaller and smaller subproblems.
+In the brute force example above, the same function calls happen only a few times, so the effect of using memoization is not so big. But in other examples with far more items to choose from, the memoization technique would be more helpful.
+
+How it works:
+
+In addition to the initial brute force code above, create an array memo to store previous results.
+For every function call with arguments for capacity c and item number i, store the result in memo[c,i].
+To avoid doing the same calculation more than once, every time the function is called with arguments c and i, check first if the result is already stored in memo[c,i].
+
+
+After improving the brute force implementation with the use of memoization, the code now looks like this:
+
+Example
+Improved solution to the 0/1 Knapsack Problem using memoization:
+def knapsack_memoization(capacity, n):
+    print(f"knapsack_memoization({n}, {capacity})")
+    if memo[n][capacity] is not None:
+        print(f"Using memo for ({n}, {capacity})")
+        return memo[n][capacity]
+    
+    if n == 0 or capacity == 0:
+        result = 0
+    elif weights[n-1] > capacity:
+        result = knapsack_memoization(capacity, n-1)
+    else:
+        include_item = values[n-1] + knapsack_memoization(capacity-weights[n-1], n-1)
+        exclude_item = knapsack_memoization(capacity, n-1)
+        result = max(include_item, exclude_item)
+
+    memo[n][capacity] = result
+    return result
+
+values = [300, 200, 400, 500]
+weights = [2, 1, 5, 3]
+capacity = 10
+n = len(values)
+
+memo = [[None]*(capacity + 1) for _ in range(n + 1)]
+
+print("\nMaximum value in Knapsack =", knapsack_memoization(capacity, n))
+Run Example »
+
+The highlighted lines in the code above show the memoization technique used to improve the previous brute force implementation.
+Line 24: Create an array memo where previous results are stored.
+Line 3-5: At the start of the function, before doing any calculations or recursive calls, check if the result has already been found and stored in the memo array.
+Line 16: Store the result for later.
+
+The Tabulation Approach (bottom-up)
+Another technique to solve the 0/1 Knapsack problem is to use something called tabulation. This approach is also called the iterative approach, and is a technique used in Dynamic Programming.
+Tabulation solves the problem in a bottom-up manner by filling up a table with the results from the most basic subproblems first. The next table values are filled in using the previous results.
+
+How it works:
+
+Consider one item at a time, and increase the knapsack capacity from 0 to the knapsack limit.
+If the current item is not too heavy, check what gives the highest value: adding it, or not adding it. Store the maximum of these two values in the table.
+In case the current item is too heavy to be added, just use the previously calculated value at the current capacity where the current item was not considered.
+
+
+Use the animation below to see how the table is filled cell by cell using previously calculated values until arriving at the final result.
+
+Find the maximum value in the knapsack.
+
+Click "Run" to fill the table.
+After the table is filled, click a cell value to see the calculation.
+
+
+Weights (kg)
+Knapsack capacities (kg)
+Values ($)
+
+
+
+Oi!
+{{n-1}}
+{{weight}}
+{{value}}
+
+
+↓
++
+=
+
+
+Maximum Value in Knapsack: $ {{ maxValue }}
+Speed: 
+Run
+
+
+The tabulation approach works by considering one item at a time, for increasing knapsack capacities. In this way the solution is built up by solving the most basic subproblems first.
+On each row an item is considered to be added to knapsack, for increasing capacities.
+
+Example
+Improved solution to the 0/1 Knapsack Problem using tabulation:
+def knapsack_tabulation():
+    n = len(values)
+    tab = [[0]*(capacity + 1) for y in range(n + 1)]
+
+    for i in range(1, n+1):
+        for w in range(1, capacity+1):
+            if weights[i-1] <= w:
+                include_item = values[i-1] + tab[i-1][w-weights[i-1]]
+                exclude_item = tab[i-1][w]
+                tab[i][w] = max(include_item, exclude_item)
+            else:
+                tab[i][w] = tab[i-1][w]
+    
+    for row in tab:
+    	  print(row)
+    return tab[n][capacity]
+
+values = [300, 200, 400, 500]
+weights = [2, 1, 5, 3]
+capacity = 10
+print("\nMaximum value in Knapsack =", knapsack_tabulation())
+Run Example »
+
+Line 7-10: If the item weight is lower than the capacity it means it can be added. Check if adding it gives a higher total value than the result calculated in the previous row, which represents not adding the item. Use the highest (max) of these two values. In other words: Choose to take, or not to take, the current item.
+Line 8: This line might be the hardest to understand. To find the value that corresponds to adding the current item, we must use the current item's value from the values array. But in addition, we must reduce the capacity with the current item's weight, to see if the remaining capacity can give us any additional value. This is similar to check if other items can be added in addition to the current item, and adding the value of those items.
+Line 12: In case the current item is heavier than the capacity (too heavy), just fill in the value from the previous line, which represents not adding the current item.
+
+Manual Run Through
+Here is a list of explanations to how a few of the table values are calculated. You can click the corresponding table cell in the animation above to get a better understanding as you read.
+Microscope, capacity 1 kg: For the first value calculated, it is checked whether the microscope can be put in the bag if the weight limit is 1 kg. The microscope weighs 2 kg, it is too heavy, and so the value 0 is just copied from the cell above which corresponds to having no items in the knapsack. Only considering the microscope for a bag with weight limit 1 kg, means we cannot bring any items and we must leave empty handed with a total value of $ 0.
+Microscope, capacity 2 kg: For the second value calculated, we are able to fit the microscope in the bag for a weight limit of 2 kg, so we can bring it, and the total value in the bag is $ 300 (the value of the microscope). And for higher knapsack capacities, only considering the microscope, means we can bring it, and so all other values in that row is $ 300.
+Globe, capacity 1 kg: Considering the globe at 1 kg and a knapsack capacity at 1 kg means that we can bring the globe, so the value is $ 200. The code finds the maximum between bringing the globe which gives us $ 200, and the previously calculated value at 1 kg capacity, which is $ 0, from the cell above. In this case it is obvious that we should bring the globe because that is the only item with such a low weight, but in other cases the previously calculated value at the same capacity might be higher.
+Globe, capacity 2 kg: At capacity 2 kg, the code sees that the globe can fit, which gives us a value of $ 200, but then the microscope cannot fit. And adding the microscope for a capacity of 2 kg gives us a value of $ 300, which is higher, so taking the microscope (value from the cell above) is the choice to maximize knapsack value for this table cell.
+Globe, capacity 3 kg: Considering the globe with a capacity of 3 kg, means that we can take the globe, but with the remaining capacity of 2 kg we can also take the microscope. In this cell, taking both the globe and the microscope gives us a higher value 200+300=500 than taking just the microscope (as calculated on the previous line), so both items are taken and the cell value is 500.
+
+Which Items Gives Us The Highest Value?
+After filling out the table and finding the maximum value the knapsack can have, it is not obvious which items we need to pack with us to get that value.
+To find the included items, we use the table we have created, and we start with the bottom right cell with the highest value, in our case the cell with value 1200 in it.
+
+Steps to find the included items:
+
+Start with bottom right cell (the cell with the highest value).
+If the cell above has the same value, it means that this row's item is not included, and we go to the cell above.
+If the cell above has a different value, it means that the current row's item is included, and we move to the row above, and we move to the left as many times as the weight of the included item.
+Continue to do steps 2 and 3 until a cell with value 0 is found.
+
+
+Here is a drawing of how the included items are found, using the step-by-step method:
+
+
+
+Weights (kg)
+Knapsack capacities (kg)
+Values ($)
+
+
+
+
+
+
+
+Oi!
+{{n-1}}
+{{weight}}
+{{value}}
+
+
+
+
+
+
+
+
+↓
++
+=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This is how the included items are found:
+
+The bottom right value is 1200, and the cell above is 900. The values are different, which means the crown is included.
+The next cell we go to is on the row above, and we move left as many times as the crown is heavy, so 3 places left to the cell with value 700.
+The cell we are in now has value 700, and the cell above has value 500. The values are different, which means the item on the current row is included: the cup.
+The cup weighs 5 kg, so the next cell we go to is on the row above, and 5 places to the left, to the cell with value 300, on the row were the globe is considered.
+The cell above has the same value 300, which means the globe is not included, and the next cell we go to is the cell right above with value 300 where the microscope is considered.
+Since the cell above is different than the current cell with value 300, it means the microscope is included.
+The next cell we go to is on the line above, and two places to the left because the microscope is 2 kg.
+We arrive at the upper leftmost cell. Since the value is 0, it means we are finished.
+
+Our 0/1 Knapsack problem has maximum value when these items are included: the crown, the cup, and the microscope.
+The same steps are added to the code below, to find the items that make up the solution to the 0/1 Knapsack problem.
+
+Example
+Extended solution to the 0/1 Knapsack Problem to find the included items:
+def knapsack_tabulation():
+    n = len(values)
+    tab = [[0] * (capacity + 1) for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        for w in range(1, capacity + 1):
+            if weights[i-1] <= w:
+                include_item = values[i-1] + tab[i-1][w - weights[i-1]]
+                exclude_item = tab[i-1][w]
+                tab[i][w] = max(include_item, exclude_item)
+            else:
+                tab[i][w] = tab[i-1][w]
+
+    for row in tab:
+        print(row)
+
+    items_included = []
+    w = capacity
+    for i in range(n, 0, -1):
+        if tab[i][w] != tab[i-1][w]:
+            items_included.append(i-1)
+            w -= weights[i-1]
+
+    print("\nItems included:", items_included)
+
+    return tab[n][capacity]
+
+values = [300, 200, 400, 500]
+weights = [2, 1, 5, 3]
+capacity = 10
+print("\nMaximum value in Knapsack =", knapsack_tabulation())
+Run Example »
+
+
+Time Complexity
+The three approaches to solving the 0/1 Knapsack Problem run differently, and with different time complexities.
+Brute Force Approach: This is the slowest of the three approaches. The possibilities are checked recursively, with the time complexity \(O(2^n)\), where \(n\) is the number of potential items we can pack. This means the number of computations double for each extra item that needs to be considered.
+Memoization Approach: Saves computations by remembering previous results, which results in a better time complexity \(O(n \cdot C)\), where \(n\) is the number of items, and \(C\) is the knapsack capacity. This approach runs otherwise in the same recursive way as the brute force approach.
+Tabulation Approach: Has the same time complexity as the memoization approach \(O(n \cdot C)\), where \(n\) is the number of items, and \(C\) is the knapsack capacity, but memory usage and the way it runs is more predictable, which normally makes the tabulation approach the most favorable.
+
+Note: Memoization and tabulation are used in something called dynamic programming, which is a powerful technique used in computer science to solve problems. To use dynamic programming to solve a problem, the problem must consist of overlapping subproblems, and that is why it can be used to solve the 0/1 Knapsack Problem, as you can see above in the memoization and tabulation approaches.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+★
++1
+
+
+
+ 
+
+
+
+W3schools Pathfinder
+Track your progress - it's free!
+
+
+ 
+
+
+
+
+
+
+
+          Log in
+        
+
+          Sign Up

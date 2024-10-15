@@ -1,59 +1,240 @@
-<!--
-  #%L
-  Code Critters
-  %%
-  Copyright (C) 2019 - 2024 Michael Gruber
-  %%
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as
-  published by the Free Software Foundation, either version 3 of the
-  License, or (at your option) any later version.
-  
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-  
-  You should have received a copy of the GNU General Public
-  License along with this program.  If not, see
-  <http://www.gnu.org/licenses/gpl-3.0.html>.
-  #L%
-  -->
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Code Critters</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="/lib/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-    <script>
-        window.Polymer = window.Polymer || {};
-        window.Polymer.dom = 'shadow';
-    </script>
-    <script type="module" src="critter_components/critter-game/critter-game.js"></script>
-    <link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoMentor Chat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        #loading {
-            display: none; /* Hidden by default */
-            color: blue;   /* Change the color as needed */
-        }
         body {
-            background: #F3F4F6;
-            font-family: Arial;
-            font-size: 0.8em;
+            background-color: #f9f9f9;
+        }
+        .container {
+            margin-top: 20px;
+            background: white;
+            border-radius: 0.25rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+        }
+        .header {
+            background-color: #30694b; /* Deep green */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .message {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 10px;
+            color: #000080; /* Navy */
+        }
+        .user {
+            background-color: #e8f5e9; /* Light Emerald Green */
+            align-self: flex-start;
+            text-align: left;
+        }
+        .assistant {
+            background-color: #d4edda; /* Light background for assistant */
+            text-align: left;
+        }
+        .footer {
+            background-color: #30694b; /* Deep green */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .timestamp, .interaction-count {
+            font-size: 0.875rem;
+            color: #6c757d;
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 0.5rem;
+        }
+        #input-container {
+            display: flex;
+            padding: 10px;
+        }
+        #input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #send-button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        #send-button:hover {
+            background-color: #0056b3;
+        }
+        #file-upload {
+            margin: 10px 0;
         }
     </style>
 </head>
-
 <body>
-    <h1>Learn Data Structures with GPT-Neo</h1>
-    <input type="text" id="promptInput" placeholder="Enter your prompt">
-    <button onclick="sendPrompt()">Generate Response</button>
-    <p id="loading">Loading...</p> <!-- Loading text -->
-    <p id="responseOutput"></p>  <!-- This is where the response will be displayed -->
+
+<div class="container">
+    <div class="header">
+        <h1>AlgoMentor Chat</h1>
+        <div>Generated on: <span id="timestamp"></span></div>
+        <div>Total Q&A Interactions: <span id="interaction-count">0</span></div>
+    </div>
+    <div id="messages" style="padding: 10px; height: 400px; overflow-y: auto;"></div>
     
-    <!-- Link to your JavaScript files -->
-    <script src="frontend/app.js"></script>
-    <script src="pathfinding/pathfinding-browser.min.js"></script>
+    <div id="file-upload">
+        <input type="file" id="files" multiple accept=".pdf"/>
+        <button id="upload-button">Upload Files</button>
+    </div>
+    
+    <div id="input-container">
+        <input type="text" id="input" placeholder="Type your message..." />
+        <button id="send-button">Send</button>
+    </div>
+    
+    <div class="footer">
+        This conversation is generated by AlgoMentor AI Tutor.
+    </div>
+</div>
+
+
+<script>
+    const messagesDiv = document.getElementById('messages');
+    const inputField = document.getElementById('input');
+    const sendButton = document.getElementById('send-button');
+    const uploadButton = document.getElementById('upload-button');
+    const timestampElement = document.getElementById('timestamp');
+    const interactionCountElement = document.getElementById('interaction-count');
+    const filesInput = document.getElementById('files');
+
+    const userEmoji = "👤";  // User emoji
+    const assistantEmoji = "🤖";  // Assistant emoji
+    let interactionCount = 0;
+
+    // Function to update the timestamp
+    const updateTimestamp = () => {
+        const now = new Date();
+        timestampElement.innerText = now.toLocaleString();
+    };
+
+    // Load chat history from local storage
+    const loadChatHistory = () => {
+        const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        chatHistory.forEach(message => {
+            displayMessage(message.content, message.role);
+        });
+    };
+
+    // Display a message in the chat
+    const displayMessage = (text, role) => {
+        const roleClass = role === 'user' ? 'user' : 'assistant';
+        const emoji = role === 'user' ? userEmoji : assistantEmoji;
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${roleClass}`;
+        messageDiv.innerHTML = `<span class='emoji'>${emoji}</span>${text}`;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
+        if (role === 'user') {
+            interactionCount++;
+            interactionCountElement.innerText = interactionCount; // Update interaction count
+        }
+    };
+
+    // Send message
+    const sendMessage = async () => {
+        const prompt = inputField.value.trim();
+        if (prompt === "") return;
+
+        // Display the user's message
+        displayMessage(prompt, 'user');
+        
+        // Save the message to local storage
+        saveMessage(prompt, 'user');
+
+        // Clear the input field
+        inputField.value = '';
+
+        // Call the backend API to get the response
+        try {
+            const response = await fetch('http://localhost:8000/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            });
+
+            if (!response.ok) throw new Error('Network response was not ok');
+
+            const data = await response.json();
+            const generatedText = data.response;
+
+            // Display the response message
+            displayMessage(generatedText, 'assistant');
+            saveMessage(generatedText, 'assistant');
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    // Save message to local storage
+    const saveMessage = (text, role) => {
+        const chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        chatHistory.push({ content: text, role });
+        localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    };
+
+    // Handle file upload
+    const uploadFiles = async () => {
+        const files = filesInput.files;
+        if (files.length === 0) {
+            alert("Please select at least one file to upload.");
+            return;
+        }
+
+        const formData = new FormData();
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+
+        try {
+            const response = await fetch('http://localhost:8000/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                displayMessage("Files uploaded successfully: " + result.filePaths.join(', '), 'assistant');
+            } else {
+                throw new Error('Failed to upload files');
+            }
+        } catch (error) {
+            console.error('Error uploading files:', error);
+        }
+    };
+
+    // Load chat history and update timestamp on page load
+    window.onload = () => {
+        loadChatHistory();
+        updateTimestamp();
+    };
+
+    // Add event listeners
+    sendButton.addEventListener('click', sendMessage);
+    inputField.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    uploadButton.addEventListener('click', uploadFiles);
+</script>
+
 </body>
 </html>

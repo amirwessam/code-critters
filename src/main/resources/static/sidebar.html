@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<!--
+  #%L
+  Code Critters
+  %%
+  Copyright (C) 2019 - 2024 Michael Gruber
+  %%
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the
+  License, or (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  #L%
+  -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Data Structures and Algorithms</title>
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Modules</h2>
+            <ul>
+                <li><a href="#arrays" class="title">Arrays</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-arrays">DSA Arrays</a></li>
+                        <li><a href="#bubble-sort">DSA Bubble Sort</a></li>
+                        <li><a href="#selection-sort">DSA Selection Sort</a></li>
+                        <li><a href="#insertion-sort">DSA Insertion Sort</a></li>
+                        <li><a href="#quick-sort">DSA Quick Sort</a></li>
+                        <li><a href="#counting-sort">DSA Counting Sort</a></li>
+                        <li><a href="#radix-sort">DSA Radix Sort</a></li>
+                        <li><a href="#merge-sort">DSA Merge Sort</a></li>
+                        <li><a href="#linear-search">DSA Linear Search</a></li>
+                        <li><a href="#binary-search">DSA Binary Search</a></li>
+                    </ul>
+                </li>
+                <li><a href="#linked-lists" class="title">Linked Lists</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-linked-lists">DSA Linked Lists</a></li>
+                        <li><a href="#linked-lists-in-memory">DSA Linked Lists in Memory</a></li>
+                        <li><a href="#linked-lists-types">DSA Linked Lists Types</a></li>
+                        <li><a href="#linked-lists-operations">Linked Lists Operations</a></li>
+                    </ul>
+                </li>
+                <li><a href="#stacks-queues" class="title">Stacks & Queues</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-stacks">DSA Stacks</a></li>
+                        <li><a href="#dsa-queues">DSA Queues</a></li>
+                    </ul>
+                </li>
+                <li><a href="#hash-tables" class="title">Hash Tables</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-hash-tables">DSA Hash Tables</a></li>
+                        <li><a href="#dsa-hash-sets">DSA Hash Sets</a></li>
+                        <li><a href="#dsa-hash-maps">DSA Hash Maps</a></li>
+                    </ul>
+                </li>
+                <li><a href="#trees" class="title">Trees</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-trees">DSA Trees</a></li>
+                        <li><a href="#dsa-binary-trees">DSA Binary Trees</a></li>
+                        <li><a href="#dsa-pre-order-traversal">DSA Pre-order Traversal</a></li>
+                        <li><a href="#dsa-in-order-traversal">DSA In-order Traversal</a></li>
+                        <li><a href="#dsa-post-order-traversal">DSA Post-order Traversal</a></li>
+                        <li><a href="#dsa-array-implementation">DSA Array Implementation</a></li>
+                        <li><a href="#dsa-binary-search-trees">DSA Binary Search Trees</a></li>
+                        <li><a href="#dsa-avl-trees">DSA AVL Trees</a></li>
+                    </ul>
+                </li>
+                <li><a href="#graphs" class="title">Graphs</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-graphs">DSA Graphs</a></li>
+                        <li><a href="#graphs-implementation">Graphs Implementation</a></li>
+                        <li><a href="#dsa-graphs-traversal">DSA Graphs Traversal</a></li>
+                        <li><a href="#cycle-detection">DSA Cycle Detection</a></li>
+                    </ul>
+                </li>
+                <li><a href="#shortest-path" class="title">Shortest Path</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-shortest-path">DSA Shortest Path</a></li>
+                        <li><a href="#dsa-dijkstras">DSA Dijkstra's</a></li>
+                        <li><a href="#dsa-bellman-ford">DSA Bellman-Ford</a></li>
+                    </ul>
+                </li>
+                <li><a href="#minimum-spanning-tree" class="title">Minimum Spanning Tree</a>
+                    <ul class="subtitle">
+                        <li><a href="#minimum-spanning-tree">Minimum Spanning Tree</a></li>
+                        <li><a href="#dsa-prims">DSA Prim's</a></li>
+                        <li><a href="#dsa-kruskals">DSA Kruskal's</a></li>
+                    </ul>
+                </li>
+                <li><a href="#maximum-flow" class="title">Maximum Flow</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-maximum-flow">DSA Maximum Flow</a></li>
+                        <li><a href="#dsa-ford-fulkerson">DSA Ford-Fulkerson</a></li>
+                        <li><a href="#dsa-edmonds-karp">DSA Edmonds-Karp</a></li>
+                    </ul>
+                </li>
+                <li><a href="#time-complexity" class="title">Time Complexity</a>
+                    <ul class="subtitle">
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#bubble-sort-time">Bubble Sort</a></li>
+                        <li><a href="#selection-sort-time">Selection Sort</a></li>
+                        <li><a href="#insertion-sort-time">Insertion Sort</a></li>
+                        <li><a href="#quick-sort-time">Quick Sort</a></li>
+                        <li><a href="#counting-sort-time">Counting Sort</a></li>
+                        <li><a href="#radix-sort-time">Radix Sort</a></li>
+                        <li><a href="#merge-sort-time">Merge Sort</a></li>
+                        <li><a href="#linear-search-time">Linear Search</a></li>
+                        <li><a href="#binary-search-time">Binary Search</a></li>
+                    </ul>
+                </li>
+                <li><a href="#dsa-reference" class="title">DSA Reference</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-euclidean-algorithm">DSA Euclidean Algorithm</a></li>
+                        <li><a href="#dsa-huffman-coding">DSA Huffman Coding</a></li>
+                        <li><a href="#dsa-traveling-salesman">DSA The Traveling Salesman</a></li>
+                        <li><a href="#dsa-01-knapsack">DSA 0/1 Knapsack</a></li>
+                        <li><a href="#dsa-memoization">DSA Memoization</a></li>
+                        <li><a href="#dsa-tabulation">DSA Tabulation</a></li>
+                        <li><a href="#dsa-dynamic-programming">DSA Dynamic Programming</a></li>
+                        <li><a href="#dsa-greedy-algorithms">DSA Greedy Algorithms</a></li>
+                    </ul>
+                </li>
+                <li><a href="#dsa-examples" class="title">DSA Examples</a>
+                    <ul class="subtitle">
+                        <li><a href="#dsa-examples">DSA Examples</a></li>
+                        <li><a href="#dsa-exercises">DSA Exercises</a></li>
+                        <li><a href="#dsa-quiz">DSA Quiz</a></li>
+                        <li><a href="#dsa-certificate">DSA Certificate</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main class="content">
+            <section id="arrays">
+                <h2>Arrays</h2>
+                <p>Introduction to Arrays...</p>
+            </section>
+            <section id="linked-lists">
+                <h2>Linked Lists</h2>
+                <p>Introduction to Linked Lists...</p>
+            </section>
+            <section id="stacks-queues">
+                <h2>Stacks & Queues</h2>
+                <p>Introduction to Stacks and Queues...</p>
+            </section>
+            <section id="hash-tables">
+                <h2>Hash Tables</h2>
+                <p>Introduction to Hash Tables...</p>
+            </section>
+            <section id="trees">
+                <h2>Trees</h2>
+                <p>Introduction to Trees...</p>
+            </section>
+            <section id="graphs">
+                <h2>Graphs</h2>
+                <p>Introduction to Graphs...</p>
+            </section>
+            <section id="shortest-path">
+                <h2>Shortest Path</h2>
+                <p>Introduction to Shortest Path...</p>
+            </section>
+            <section id="minimum-spanning-tree">
+                <h2>Minimum Spanning Tree</h2>
+                <p>Introduction to Minimum Spanning Tree...</p>
+            </section>
+            <section id="maximum-flow">
+                <h2>Maximum Flow</h2>
+                <p>Introduction to Maximum Flow...</p>
+            </section>
+            <section id="time-complexity">
+                <h2>Time Complexity</h2>
+                <p>Introduction to Time Complexity...</p>
+            </section>
+            <section id="dsa-reference">
+                <h2>DSA Reference</h2>
+                <p>Introduction to DSA Reference...</p>
+            </section>
+            <section id="dsa-examples">
+                <h2>DSA Examples</h2>
+                <p>Introduction to DSA Examples...</p>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
