@@ -1,0 +1,357 @@
+## DSA Examples
+
+DSA Examples
+
+A Simple Algorithm
+
+Finds the 20 first Fibonacci numbers using a for-loop
+
+Finds the 20 first Fibonacci numbers using recursion
+
+Finds the nth Fibonacci number using recursion
+
+A Simple Algorithm Explained
+
+Arrays
+
+Prints the value of an array element
+
+Finds the lowest value in an array
+
+Arrays Explained
+
+Bubble Sort
+
+Bubble Sort
+
+Improved Bubble Sort
+
+Bubble Sort Explained
+
+Selection Sort
+
+Selection Sort
+
+Improved Selection Sort
+
+Selection Sort Explained
+
+Insertion Sort
+
+Insertion Sort
+
+Improved Insertion Sort
+
+Insertion Sort Explained
+
+Quick Sort
+
+Quick Sort
+
+Quick Sort Explained
+
+Counting Sort
+
+Counting Sort
+
+Counting Sort Explained
+
+Radix Sort
+
+Radix Sort
+
+Radix Sort using Bubble Sort
+
+Radix Sort Explained
+
+Merge Sort
+
+Merge Sort
+
+Merge Sort without recursion
+
+Merge Sort Explained
+
+Linear Search
+
+Linear Search
+
+Linear Search Explained
+
+Binary Search
+
+Binary Search
+
+Binary Search Explained
+
+Linked Lists in Memory
+
+C Example prints memory information
+
+Basic linked list example in C
+
+Basic linked list example in Python and Java
+
+Linked Lists in Memory Explained
+
+Linked Lists Types
+
+Singly linked list
+
+Doubly linked list
+
+Circular singly linked list
+
+Circular doubly linked list
+
+Linked Lists Types Explained
+
+Linked Lists Operations
+
+Traversal of a linked list
+
+Find the lowest value in a linked list
+
+Delete a node in a linked list
+
+Insert a node in a linked list
+
+Linked Lists Operations Explained
+
+Stacks
+
+A very basic Python stack example, only using built-in array operations
+
+Stack data structure
+
+Stack implementation using linked lists
+
+Stacks Explained
+
+Queues
+
+A very basic Python queue example, only using built-in array operations
+
+Queue data structure
+
+Queue implementation using linked lists
+
+Queues Explained
+
+Hash Tables
+
+Hash function
+
+Check if hash set contains a name
+
+A very basic Hash Set
+
+Hash Tables Explained
+
+Hash Sets
+
+A simple Hash Set
+
+Hash Sets Explained
+
+Hash Maps
+
+A simple Hash Map
+
+Hash Maps Explained
+
+Binary Trees
+
+A binary tree
+
+Binary Trees Explained
+
+Pre-order Traversal
+
+Pre-order traversal of a binary tree
+
+Pre-order Traversal Explained
+
+In-order Traversal
+
+In-order traversal of a binary tree
+
+In-order Traversal Explained
+
+Post-order Traversal
+
+Post-order traversal of a binary tree
+
+Post-order Traversal Explained
+
+Array Implementation of Binary Trees
+
+Array implementation of a binary tree
+
+Array implementation of a binary tree, with traversals
+
+Array Implementation of Binary Trees Explained
+
+Binary Search Trees
+
+Binary search tree traversal
+
+Searching for a value in a binary search tree
+
+Inserting a node in a binary search tree
+
+Finding the lowest value in a binary search tree
+
+Deleting a node in a binary search tree
+
+Binary Search Trees Explained
+
+AVL Trees
+
+Inserting a node in an AVL tree
+
+Deleting a node in an AVL tree
+
+AVL Trees Explained
+
+Graphs Implementation
+
+A basic undirected graph
+
+Printing the edges in a basic undirected graph
+
+A graph implementation using classes
+
+A directed and weighted graph
+
+Graphs Implementation Explained
+
+Graphs Traversal
+
+Depth First Search Traversal
+
+Breadth First Search Traversal
+
+DFS and BFT traversal of a directed graph
+
+Graphs Traversal Explained
+
+Cycle Detection in Graphs
+
+DFS Cycle Detection for undirected graphs
+
+DFS Cycle Detection for directed graphs
+
+Union Find Cycle Detection
+
+Cycle Detection in Graphs Explained
+
+Dijkstra's Algorithm
+
+Dijkstra's algorithm on an undirected graph
+
+Dijkstra's algorithm on a directed graph
+
+Dijkstra's algorithm, with the shortest paths returned
+
+Dijkstra's algorithm, with a single destination vertex
+
+Dijkstra's Algorithm Explained
+
+The Bellman-Ford Algorithm
+
+The Bellman-Ford algorithm on an undirected graph
+
+The Bellman-Ford algorithm with negative cycle detection
+
+The Bellman-Ford, with the shortest paths returned
+
+The Bellman-Ford Algorithm Explained
+
+Prim's Algorithm
+
+Prim's algorithm. Finds the Minimum Spanning Tree.
+
+Prim's Algorithm Explained
+
+Kruskal's Algorithm
+
+Kruskal's algorithm. Finds the Minimum Spanning Tree.
+
+Kruskal's Algorithm Explained
+
+The Ford-Fulkerson Algorithm
+
+The Ford-Fulkerson algorithm. Finds the Maximum Flow.
+
+The Ford-Fulkerson Algorithm Explained
+
+The Edmonds-Karp Algorithm
+
+The Edmonds-Karp algorithm. Finds the Maximum Flow.
+
+The Edmond-Karp Algorithm Explained
+
+The Eucledian Algorithm
+
+The Eucledian algorithm. Finds the greatest common divisor using division.
+
+The original Eucledian algorithm. Finds the greatest common divisor using subtraction.
+
+The Eucledian Algorithm Explained
+
+Huffman Coding
+
+Huffman Coding.
+
+Huffman Coding and Decoding.
+
+Huffman Coding Explained
+
+The Traveling Salesman Problem
+
+Solving The Traveling Salesman Problem by checking all possible routes (brute force).
+
+Finding a near-optimal solution to the Traveling Salesman Problem using the nearest-neighbor algorithm (greedy).
+
+The Traveling Salesman Explained
+
+The 0/1 Knapsack Problem
+
+Solving the 0/1 Knapsack Problem using recursion and brute force.
+
+Solving the 0/1 Knapsack Problem using memoization.
+
+Solving the 0/1 Knapsack Problem using tabulation.
+
+Solution to the 0/1 Knapsack Problem that also returns the included items.
+
+The 0/1 Knapsack Problem Explained
+
+Memoization
+
+Finding the 6th Fibonacci number with recursion.
+
+Finding the 6th Fibonacci number with recursion together with memoization.
+
+Finding the 30th Fibonacci number, with and without memoization.
+
+Memoization in AVL Trees.
+
+Memoization Explained
+
+Tabulation
+
+Finding the 10th Fibonacci number using tabulation.
+
+Tabulation Explained
+
+Dynamic Programming
+
+Algorithm created with Dynamic Programming: Finds the 6th Fibonacci number.
+
+Dynamic Programming Explained
+
+★
+
++1
